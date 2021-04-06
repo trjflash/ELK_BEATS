@@ -34,7 +34,7 @@ services:
     command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
     networks:
       - beats
-	  
+
   heartbeat:
     image: docker.elastic.co/beats/heartbeat:$ELASTIC_VERSION
     container_name: heartbeat
