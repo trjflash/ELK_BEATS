@@ -3,52 +3,54 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:$ELASTIC_VERSION
     container_name: filebeat
-	user: root
-	environment:
+    user: root
+    environment:
       - ELASTICSEARCH_HOST=$ELASTICSEARCH_HOST
       - KIBANA_HOST=$KIBANA_HOST
       - ELASTICSEARCH_USERNAME=$ELASTICSEARCH_USERNAME
       - ELASTICSEARCH_PASSWORD=$ELASTICSEARCH_PASSWORD
     volumes:
       - beats:/usr/share/filebeat
-	  # - /path/to/logs/folder:/path/to/logs/folder
-	  - /var/run/docker.sock:/var/run/docker.sock
-	command: ["--strict.perms=false"]
+      #- /path/to/logs/folder:/path/to/logs/folder
+      /var/run/docker.sock:/var/run/docker.sock
+    command: ["--strict.perms=false"]
     networks:
       - beats
 
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:$ELASTIC_VERSION
     container_name: metricbeat
-	user: root
+    user: root
     environment:
       - ELASTICSEARCH_HOST=$ELASTICSEARCH_HOST
       - KIBANA_HOST=$KIBANA_HOST
       - ELASTICSEARCH_USERNAME=$ELASTICSEARCH_USERNAME
       - ELASTICSEARCH_PASSWORD=$ELASTICSEARCH_PASSWORD
-	volumes:
+    volumes:
       - beats:/usr/share/metricbeat
-	  # - /path/to/logs/folder:/path/to/logs/folder
-	  - /var/run/docker.sock:/var/run/docker.sock
-	command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
-	networks:
+      - /var/run/docker.sock:/var/run/docker.sock
+      #- /path/to/logs/folder:/path/to/logs/folder
+
+    command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
+    networks:
       - beats
 	  
   heartbeat:
     image: docker.elastic.co/beats/heartbeat:$ELASTIC_VERSION
     container_name: heartbeat
-	user: root
+    user: root
     environment:
       - ELASTICSEARCH_HOST=$ELASTICSEARCH_HOST
       - KIBANA_HOST=$KIBANA_HOST
       - ELASTICSEARCH_USERNAME=$ELASTICSEARCH_USERNAME
       - ELASTICSEARCH_PASSWORD=$ELASTICSEARCH_PASSWORD
-	volumes:
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - beats:/usr/share/heartbeat
-	  # - /path/to/logs/folder:/path/to/logs/folder
-	  - /var/run/docker.sock:/var/run/docker.sock
-	command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
-	networks:
+      #- /path/to/logs/folder:/path/to/logs/folder
+	  
+    command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
+    networks:
       - beats      
 volumes:
   beats:
