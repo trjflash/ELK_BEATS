@@ -7,8 +7,8 @@ services:
     environment:
       - ELASTICSEARCH_HOST=$ELASTICSEARCH_HOST
       - KIBANA_HOST=$KIBANA_HOST
-      - ELASTICSEARCH_USERNAME=$ELASTICSEARCH_USERNAME
-      - ELASTICSEARCH_PASSWORD=$ELASTICSEARCH_PASSWORD
+      - ELASTICSEARCH_USERNAME=$ELASTIC_USER
+      - ELASTICSEARCH_PASSWORD=$ELASTIC_PASSWORD
     volumes:
       - beats:/usr/share/filebeat
       #- /path/to/logs/folder:/path/to/logs/folder
@@ -24,8 +24,8 @@ services:
     environment:
       - ELASTICSEARCH_HOST=$ELASTICSEARCH_HOST
       - KIBANA_HOST=$KIBANA_HOST
-      - ELASTICSEARCH_USERNAME=$ELASTICSEARCH_USERNAME
-      - ELASTICSEARCH_PASSWORD=$ELASTICSEARCH_PASSWORD
+      - ELASTICSEARCH_USERNAME=$ELASTIC_USER
+      - ELASTICSEARCH_PASSWORD=$ELASTIC_PASSWORD
     volumes:
       - beats:/usr/share/metricbeat
       - /var/run/docker.sock:/var/run/docker.sock
@@ -42,8 +42,8 @@ services:
     environment:
       - ELASTICSEARCH_HOST=$ELASTICSEARCH_HOST
       - KIBANA_HOST=$KIBANA_HOST
-      - ELASTICSEARCH_USERNAME=$ELASTICSEARCH_USERNAME
-      - ELASTICSEARCH_PASSWORD=$ELASTICSEARCH_PASSWORD
+      - ELASTICSEARCH_USERNAME=$ELASTIC_USER
+      - ELASTICSEARCH_PASSWORD=$ELASTIC_PASSWORD
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - beats:/usr/share/heartbeat
