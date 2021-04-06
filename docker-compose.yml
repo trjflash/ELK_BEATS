@@ -12,7 +12,7 @@ services:
     volumes:
       - beats:/usr/share/filebeat
       #- /path/to/logs/folder:/path/to/logs/folder
-      /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     command: ["--strict.perms=false"]
     networks:
       - beats
