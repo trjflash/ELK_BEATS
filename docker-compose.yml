@@ -48,7 +48,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - beats:/usr/share/heartbeat
       #- /path/to/logs/folder:/path/to/logs/folder
-	  
+      
     command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
     networks:
       - beats      
